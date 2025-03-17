@@ -20,23 +20,29 @@ const CompareModal: React.FC<CompareModalProps> = ({ cinemaWorldId, filmWorldId,
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const loadComparison = async () => {
-      if (!cinemaWorldId && !filmWorldId) {
-        setError('No valid movie IDs provided.');
-        setLoading(false);
-        return;
-      }
+  const loadComparison = async () => {
+    if (!cinemaWorldId && !filmWorldId) {
+      setError('No valid movie IDs provided.');
+      setLoading(false);
+      return;
+    }
 
-      try {
-        const data = await compareMovies(cinemaWorldId || '', filmWorldId || '');
-        setComparison(data);
-      } catch (err) {
-        setError('Failed to load comparison data.');
-      } finally {
-        setLoading(false);
-      }
-    };
+    setLoading(true);
+    setError(null);
+    console.log('Attempting to load comparison data for:', { cinemaWorldId, filmWorldId });
+    try {
+      const data = await compareMovies(cinemaWorldId || '', filmWorldId || '');
+      setComparison(data);
+      console.log('Comparison data loaded successfully:', data);
+    } catch (err) {
+      setError('Failed to load comparison data.');
+      console.error('Error loading comparison data:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     loadComparison();
   }, [cinemaWorldId, filmWorldId]);
 
@@ -49,7 +55,7 @@ const CompareModal: React.FC<CompareModalProps> = ({ cinemaWorldId, filmWorldId,
     const fwPrice = comparison.filmWorldMovie?.price
       ? parseFloat(comparison.filmWorldMovie.price)
       : null;
-    
+
     if (cwPrice !== null && fwPrice !== null) {
       return Math.min(cwPrice, fwPrice);
     }
@@ -69,7 +75,7 @@ const CompareModal: React.FC<CompareModalProps> = ({ cinemaWorldId, filmWorldId,
           onClick={onClose}
         />
         <motion.div
-          className="relative bg-gray-900 rounded-lg p-6 w-full max-w-2xl mx-4 border-t-4 border-green-500"
+          className="relative bg-gray-900 rounded-lg p-4 sm:p-6 w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl mx-4 border-t-4 border-green-500"
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
@@ -84,13 +90,13 @@ const CompareModal: React.FC<CompareModalProps> = ({ cinemaWorldId, filmWorldId,
             X
           </button>
 
-          <Dialog.Title className="text-2xl font-bold text-gray-200 mb-4">
-            {comparison?.title || 'Price Comparison'}
+          <Dialog.Title className="text-lg sm:text-xl md:text-2xl font-bold text-gray-200 mb-4">
+            {comparison?.title || 'Compare Prices We Must!'}
           </Dialog.Title>
 
           {loading && (
             <div className="space-y-6">
-              <Skeleton width="w-full" height="h-64" className="rounded-lg mb-4" />
+              <Skeleton width="w-full" height="h-48 sm:h-64" className="rounded-lg mb-4" />
               <div className="space-y-2">
                 <Skeleton width="w-3/4" height="h-6" />
                 <Skeleton width="w-1/2" height="h-4" />
@@ -112,7 +118,33 @@ const CompareModal: React.FC<CompareModalProps> = ({ cinemaWorldId, filmWorldId,
             </div>
           )}
 
-          {error && <p className="text-red-400">{error}</p>}
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="flex flex-col items-center"
+            >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/en/9/9b/Yoda_Empire_Strikes_Back.png"
+                alt="Yoda Error"
+                className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 mx-auto mb-4 rounded-full object-cover"
+              />
+              <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-200 mb-2 sm:mb-4 text-center">
+                Do or do not. There is retry.
+              </h2>
+              <p className="mb-2 sm:mb-4 text-gray-300 text-sm sm:text-base text-center">
+                Happens to every guy sometimes this does.
+              </p>
+              <p className="mb-2 sm:mb-4 text-gray-300 text-xs sm:text-sm text-center">{error}</p>
+              <button
+                onClick={loadComparison}
+                className="bg-green-600 text-white py-1 px-3 sm:py-2 sm:px-4 rounded-lg hover:bg-green-700 transition-colors text-sm sm:text-base"
+              >
+                Retry
+              </button>
+            </motion.div>
+          )}
 
           {!loading && !error && comparison && (
             <div className="space-y-6">

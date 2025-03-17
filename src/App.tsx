@@ -92,7 +92,7 @@ const App: React.FC = () => {
               className="h-24 hidden md:block" // Desktop logo (586x254)
             />
           </div>
-          <p className="text-lg md:text-xl mb-6 font-semibold text-green-400 italic">With you, may the Force be!</p>
+          <p className="text-lg md:text-xl mb-6 font-semibold text-green-400 italic">May the Force be With You!</p>
           {/* Search Bar */}
           <div className="max-w-md mx-auto mb-8 shadow-green-600 shadow-xl">
             <input
