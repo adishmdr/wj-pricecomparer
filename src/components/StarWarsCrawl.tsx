@@ -1,4 +1,4 @@
-// src/components/StarWarsCrawl.tsx
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 

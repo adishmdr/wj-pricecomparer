@@ -1,4 +1,4 @@
-// src/components/ComparisonTable.tsx
+
 import React from 'react';
 import { MovieComparison } from '../types';
 

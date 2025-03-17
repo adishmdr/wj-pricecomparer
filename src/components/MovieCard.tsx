@@ -1,4 +1,4 @@
-// src/components/MovieCard.tsx
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { MovieComparison } from '../types';

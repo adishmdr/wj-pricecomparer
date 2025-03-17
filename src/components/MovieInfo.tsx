@@ -1,4 +1,4 @@
-// src/components/MovieInfo.tsx
+
 import React from 'react';
 import { MovieComparison } from '../types';
 import { FALLBACK_IMAGE_URL } from '../constants/constants';

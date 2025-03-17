@@ -1,4 +1,4 @@
-// src/components/CompareModal.tsx
+
 import React, { useState, useEffect } from 'react';
 import { Dialog } from '@headlessui/react';
 import { motion } from 'framer-motion';

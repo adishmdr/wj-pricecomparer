@@ -1,4 +1,4 @@
-// src/api/movieApi.ts
+
 import axios from 'axios';
 import { MovieComparison } from '../types';
 
