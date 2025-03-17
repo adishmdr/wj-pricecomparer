@@ -1,13 +1,38 @@
-body {
+/* src/index.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global styles */
+html, body, #root {
+  font-family: 'Poppins', sans-serif;
+  color: #e0e0e0; /* Light gray text for readability */
+  min-height: 100vh;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Full-screen background image with opacity */
+body {
+  background: url('https://scontent.fmel10-1.fna.fbcdn.net/v/t39.30808-6/466859393_9044401512278036_2623133040293224338_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=ky5NC6_kvcMQ7kNvgGUSUAv&_nc_oc=Adh63LN5CwSTaR3qh3MD7iuQtJUnoVxmiKvrly-YGF5c_wcmj-ufoAzIl7BhQPF65Ks&_nc_zt=23&_nc_ht=scontent.fmel10-1.fna&_nc_gid=XIS3IhKopkR6KGG3awjYsw&oh=00_AYHdSWLew9jK6kqL78rIfhf_2i4HxKbOKmKi5R0gzevBZA&oe=67DD5CF8') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Black overlay with 60% opacity */
+  z-index: 0;
+}
+
+#root {
+  position: relative;
+  z-index: 1; /* Ensure content is above the overlay */
 }
