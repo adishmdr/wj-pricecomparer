@@ -9,57 +9,41 @@ const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasStartedCrawl, setHasStartedCrawl] = useState(false);
 
-  // Check if it's the first visit using localStorage
+  
   useEffect(() => {
     const hasVisited = localStorage.getItem('hasVisited');
     if (!hasVisited) {
-      setIsLoading(true); // Show loading screen on first visit
+      setIsLoading(true); 
+      // const audio = new Audio('/audio/starwars-theme.mp3'); 
+      // audio.volume = 0.5; 
+      // audio.play().catch((err) => {
+      //   console.error('Audio playback failed:', err.message);
+      //   alert('Audio failed to play. Please ensure the file is accessible.');
+      // });
+
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+        // audio.pause();
+        localStorage.setItem('hasVisited', 'true'); 
+      }, 5000); // 5 seconds for the crawl
+
+      return () => {
+        clearTimeout(timer);
+        // audio.pause();
+      };
     }
   }, []);
-
-  const handleStartCrawl = () => {
-    const audio = new Audio('/wj-frontend/public/audio/starwars-theme.mp3'); // Replace with actual path or URL
-    audio.play().catch((err) => {
-      console.log('Audio playback failed:', err);
-    });
-
-    setHasStartedCrawl(true);
-
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-      audio.pause(); // Stop audio when loading ends
-      localStorage.setItem('hasVisited', 'true'); // Mark as visited
-    }, 10000); // 5 seconds for the crawl
-
-    return () => {
-      clearTimeout(timer);
-      audio.pause();
-    };
-  };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
 
-  if (isLoading && !hasStartedCrawl) {
-    return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <button
-          onClick={handleStartCrawl}
-          className="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors text-lg font-semibold"
-        >
-          Start Crawl
-        </button>
-      </div>
-    );
-  }
   const handleCrawlComplete = () => {
     setIsLoading(false);
   };
+
   if (isLoading) {
-    
-      return <StarWarsCrawl onComplete={handleCrawlComplete} />;
-    
+    return <StarWarsCrawl onComplete={handleCrawlComplete} />;
   }
 
   return (

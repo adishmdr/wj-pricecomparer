@@ -1,8 +1,36 @@
-# Getting Started with Create React App
+# StarWars Movie Comparer - Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the frontend of the StarWars Movie Comparer! This React-based application allows users to compare movie prices from CinemaWorld and FilmWorld, with a fun Star Wars twist. I aimed to create a user-friendly, responsive interface with a Star Wars-themed loading screen and error handling.
 
-## Available Scripts
+## Features
+- **Movie Listing**: Displays a responsive grid of movies sorted by year.
+- **Price Comparison**: Opens a modal to compare prices between CinemaWorld and FilmWorld.
+- **Search Functionality**: Filters movies by title.
+- **Star Wars Theme**: Features a Star Wars crawler intro on first visit (with music, though animation is basic due to time constraints), Yoda-themed error messages, and a Star Wars logo favicon.
+- **Responsive Design**: Adapts to mobile, tablet, and desktop screens with Tailwind CSS.
+- **Retry Mechanism**: Allows users to retry failed API calls with styled buttons.
+
+## Tech Stack
+- **React**: For building the dynamic UI.
+- **TypeScript**: For type safety and error reduction.
+- **Tailwind CSS**: For responsive and stylish design.
+- **Framer Motion**: For smooth animations in loading and error states.
+
+## Installation Process
+
+### Prerequisites
+- **Node.js**: Version 14 or higher ([download](https://nodejs.org/))
+- **npm**: Version 6 or higher (included with Node.js)
+- **Git**: For cloning the repository ([download](https://git-scm.com/))
+
+### Steps
+1. **Clone the Repository**
+   - Open your terminal and run:
+     ```bash
+     git clone https://github.com/yourusername/movie-price-comparer.git
+     cd movie-price-comparer
+     cd movie-price-comparer
+
 
 In the project directory, you can run:
 
